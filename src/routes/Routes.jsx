@@ -24,7 +24,7 @@ const Routes = createBrowserRouter([
                 element: <Dashboard/>
             },
             {
-                path: "our-menu",
+                path: "/our-menu",
                 element: <OurMenu/>
             },
             {

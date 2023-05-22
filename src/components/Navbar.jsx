@@ -1,24 +1,31 @@
 import { NavLink } from "react-router-dom";
 import logo from "/logo.png"
+import { useState } from "react";
+import { HiMenuAlt1 } from "react-icons/hi";
+import { MdClose } from "react-icons/md";
 const Navbar = () => {
+    const [toggle, seToggle] = useState(true)
     return (
-        <nav>
-            <img src={logo} alt="logo" />
-            <ul>
+        <nav className="flex justify-between px-3 py-[23px] md:px-[55px] absolute top-0 left-0 right-0 bg-[#1515157f]">
+            <img className="h-[45px]" src={logo} alt="logo" />
+            <button onClick={() => seToggle(!toggle)} className="text-white text-2xl md:hidden">
+            { toggle ? <MdClose/> : <HiMenuAlt1/> }
+            </button>
+            <ul className={`flex transition-all duration-200 md:flex-row flex-col p-4 bg-[#1515157f] w-full md:w-auto md:bg-transparent absolute md:static top-[90px] md:items-center gap-4 text-white ${toggle ? "left-0" : "-left-full"}`}>
                 <li>
-                    <NavLink className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Home</NavLink>
+                    <NavLink to="/" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Home</NavLink>
                 </li>
                 <li>
-                    <NavLink className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Contact Us</NavLink>
+                    <NavLink to="/contact-us" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Contact Us</NavLink>
                 </li>
                 <li>
-                    <NavLink className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Dashboard</NavLink>
+                    <NavLink to="/dashboard" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Dashboard</NavLink>
                 </li>
                 <li>
-                    <NavLink className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Menu</NavLink>
+                    <NavLink to="/our-menu" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Menu</NavLink>
                 </li>
                 <li>
-                    <NavLink className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Shop</NavLink>
+                    <NavLink to="/our-shop" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Shop</NavLink>
                 </li>
             </ul>
         </nav>
