@@ -3,10 +3,15 @@
 @tailwind utilities;
 
 
+.container {
+    @apply max-w-[1140px] mx-auto px-3
+}
+
+.btn-primary {
+    @apply  border-t-[#ffffff] rounded border-[#1F2937] hover:bg-[#1F2937] p-2 hover:text-white duration-100 border-b-4 block mx-auto
+}
+
 .active {
     @apply text-[#EEFF25] font-bold uppercase
 }
 
-.container {
-    @apply max-w-[1140px] mx-auto px-3
-}
