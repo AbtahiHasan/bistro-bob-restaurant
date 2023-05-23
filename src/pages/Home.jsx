@@ -4,6 +4,7 @@ import Order from "../components/Order";
 import Service from "../components/Service";
 import PopulerMenu from "../components/PopulerMenu";
 import Contact from "../components/Contact";
+import Recommends from "../components/Recommends";
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
             <Service/>
             <PopulerMenu/>
             <Contact/>
+            <Recommends/>
         </main>
     );
 };

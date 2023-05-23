@@ -22,7 +22,7 @@ const PopulerMenu = () => {
                 }
                 
             </div>
-            <button className="btn-primary my-6">View Full  Menu</button>
+            <button className="btn-primary my-6 block mx-auto">View Full  Menu</button>
         </section>
     );
 };
