@@ -6,3 +6,7 @@
 .active {
     @apply text-[#EEFF25] font-bold uppercase
 }
+
+.container {
+    @apply max-w-[1140px] mx-auto px-3
+}
