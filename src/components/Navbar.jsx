@@ -6,7 +6,7 @@ import { MdClose } from "react-icons/md";
 const Navbar = () => {
     const [toggle, seToggle] = useState(true)
     return (
-        <nav className="flex justify-between px-3 py-[23px] md:px-[55px] absolute top-0 left-0 right-0 bg-[#1515157f]">
+        <nav className="flex justify-between px-3 py-2 md:px-[55px] z-[1000000] fixed top-0 left-0 right-0 bg-[#1515157f]">
             <img className="h-[45px]" src={logo} alt="logo" />
             <button onClick={() => seToggle(!toggle)} className="text-white text-2xl md:hidden">
             { toggle ? <MdClose/> : <HiMenuAlt1/> }
