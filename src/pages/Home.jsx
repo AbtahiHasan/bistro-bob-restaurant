@@ -5,6 +5,7 @@ import Service from "../components/Service";
 import PopulerMenu from "../components/PopulerMenu";
 import Contact from "../components/Contact";
 import Recommends from "../components/Recommends";
+import FeaturedMenu from "../components/FeaturedMenu";
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
             <PopulerMenu/>
             <Contact/>
             <Recommends/>
+            <FeaturedMenu/>
         </main>
     );
 };
