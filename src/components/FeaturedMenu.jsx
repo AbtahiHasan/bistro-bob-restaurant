@@ -6,7 +6,7 @@ const FeaturedMenu = () => {
             <div className="container">
                 <Heading className={"my-5"} varient="white" heading="Check it out" subHeading="FROM OUR MENU" />
         
-                <article className="flex">
+                <article className="md:flex">
                     <img className="w-full" src={"https://cristianonew.ukrdevs.com/wp-content/uploads/2016/08/product-1-370x247.jpg"} alt="" />
                     <div className="px-8  text-white">
                         <h3>March 20, 2023</h3>
