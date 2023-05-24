@@ -6,6 +6,7 @@ import PopulerMenu from "../components/PopulerMenu";
 import Contact from "../components/Contact";
 import Recommends from "../components/Recommends";
 import FeaturedMenu from "../components/FeaturedMenu";
+import Testimonials from "../components/Testimonials";
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
             <Contact/>
             <Recommends/>
             <FeaturedMenu/>
+            <Testimonials/>
         </main>
     );
 };
