@@ -7,15 +7,11 @@ import { Navigation } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import useReviews from "../hooks/useReviews";
 
 const Testimonials = () => {
-    const [ratings, setRatings] = useState([])
-    console.log(ratings)
-    useEffect(() => {
-        fetch("ratings.json")
-        .then(res => res.json())
-        .then(data => setRatings(data))
-    },[])
+ 
+    const ratings = useReviews()
     return (
         <section className="mt-[140px] container">
             <Heading heading={"TESTIMONIALS"} subHeading={"What Our Clients Say"}/>
