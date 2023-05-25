@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import FoodCard from "./FoodCard";
 import Heading from "./Heading";
 import useMenus from "../hooks/useMenus";

@@ -15,3 +15,10 @@
     @apply text-[#EEFF25] font-bold uppercase
 }
 
+.animated {
+    @apply flex justify-center items-center
+}
+
+.slide {
+     @apply w-full block
+}

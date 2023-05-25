@@ -9,24 +9,24 @@ import bannerImg6 from "/home/06.png"
 const Banner = () => {
     return (
         <section>
-             <Carousel centerMode={true}>
-                <div>
-                    <img src={bannerImg1} />
+             <Carousel centerMode={false}>
+                <div className="w-full">
+                    <img className="w-full object-cover" src={bannerImg1} />
                 </div>
-                <div>
-                    <img src={bannerImg2} />
+                <div className="w-full">
+                    <img className="w-full object-cover" src={bannerImg2} />
                 </div>
-                <div>
-                    <img src={bannerImg3} />
+                <div className="w-full">
+                    <img className="w-full object-cover" src={bannerImg3} />
                 </div>
-                <div>
-                    <img src={bannerImg4} />
+                <div className="w-full">
+                    <img className="w-full object-cover" src={bannerImg4} />
                 </div>
-                <div>
-                    <img src={bannerImg5} />
+                <div className="w-full">
+                    <img className="w-full object-cover" src={bannerImg5} />
                 </div>
-                <div>
-                    <img src={bannerImg6} />
+                <div className="w-full">
+                    <img className="w-full object-cover" src={bannerImg6} />
                 </div>
             </Carousel>
         </section>
