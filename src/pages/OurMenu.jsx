@@ -1,3 +1,4 @@
+import Heading from "../components/Heading"
 import MenuCover from "../components/MenuCover"
 import Menus from "../components/Menus"
 import useCategory from "../hooks/useCategory"
@@ -12,13 +13,16 @@ const OurMenu = () => {
     const pizza = useCategory("pizza")
     const salad = useCategory("salad")
     const soup = useCategory("soup")
+    const offered = useCategory("offered")
     return (
         <main>
             <MenuCover variant={"banner"} title={"OUR MENU"} img={banner}/>
-            <Menus category={dessert} title={"dessert"} img={dessertImg}/>
-            <Menus category={pizza} title={"pizza"} img={pizzaImg}/>
-            <Menus category={salad} title={"salad"} img={saladImg}/>
-            <Menus category={soup} title={"soup"} img={soupImg}/>
+            <Heading className="mt-[140px]" heading={"TODAY'S OFFER"} subHeading={"Don't miss"}/>
+            <Menus category={offered} banner={false}  title={"dessert"} img={dessertImg}/>
+            <Menus category={dessert} banner={true}  title={"dessert"} img={dessertImg}/>
+            <Menus category={pizza} banner={true}  title={"pizza"} img={pizzaImg}/>
+            <Menus category={salad} banner={true}  title={"salad"} img={saladImg}/>
+            <Menus category={soup} banner={true}  title={"soup"} img={soupImg}/>
         </main>
     );
 };
