@@ -6,7 +6,7 @@ import MenuCard from "./MenuCard";
 const PopulerMenu = () => {
     const [menues, setMenues] = useState([])
     useEffect(() => {
-        fetch("/menu.json")
+        fetch("http://localhost:3000/menus")
         .then(res => res.json())
         .then(data => {
             const populler = data.filter(menu => menu.category === "popular")
