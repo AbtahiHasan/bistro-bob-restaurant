@@ -25,7 +25,7 @@ const Navbar = () => {
                     <NavLink to="/our-menu" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Menu</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/our-shop" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Shop</NavLink>
+                    <NavLink to="/our-shop/salad" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Shop</NavLink>
                 </li>
             </ul>
         </nav>
