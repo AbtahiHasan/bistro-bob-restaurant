@@ -1,11 +1,77 @@
-import React from 'react';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha, LoadCanvasTemplateNoReload } from 'react-simple-captcha';
 import bg from "/reservation/wood-grain-pattern.png"
 import authenticationImg from "/others/authentication2.png"
 import { RiFacebookFill } from "react-icons/ri";
 import { IoLogoGoogle } from "react-icons/io";
 import { AiFillGithub } from "react-icons/ai";
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthProvider';
 const Login = () => {
-    return (
+    const CaptchaInput = useRef(null)
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/'
+    const {signIn, signInWithGoogle, signInWithGithub} = useAuth()
+    const [error, setError] = useState(null)
+
+
+    
+    useEffect(() => {
+        loadCaptchaEnginge(6); 
+    },[])
+    const login = (e) => {
+        e.preventDefault()
+        
+        if(validateCaptcha(CaptchaInput.current.value)) {
+            const form = e.target
+            const email = form.email.value;
+            const password = form.password.value
+            setError(null)
+
+            if(!email || !password) {
+                setError("Cannot leave any field empty")
+                return
+            } 
+            signIn(email, password) 
+            .then (() => {
+                navigate(from, { replace: true })
+                form.reset()
+            })
+            .catch(error => {
+                setError(error.message)  
+            })
+            }
+            else {
+                setError("Captcha is not valid")
+            }
+    } 
+
+    const handelGoogle = () => {
+        signInWithGoogle()
+            .then((result) => {
+
+                navigate(from)
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+    }
+
+    const handelGitHub = () => {
+        signInWithGithub()
+        .then((result) => {
+            const gitHub = result.user;
+
+            navigate(from)
+        })
+        .catch((error) => {
+            console.log(error.message)
+        })
+}
+    
+    return ( 
         <main>
             <img className='w-full h-full fixed top-0 left-0 right-0 bottom-0' src={bg} alt="" />
             <section className='container relative z-50 h-screen  flex items-center'>
@@ -13,7 +79,7 @@ const Login = () => {
                     <div>
                         <img className='w-full' src={authenticationImg} alt="" />
                     </div>
-                    <form>
+                    <form onSubmit={login}>
                         <div className='mt-5'>
                             <label className='font-bold block'>Email</label>
                             <input className='px-7 py-4 bg-white rounded-md outline-0' type="email" placeholder='Type here'/>
@@ -23,8 +89,13 @@ const Login = () => {
                             <input className='px-7 py-4 bg-white rounded-md outline-0' type="password" placeholder='Enter your password'/>
                         </div>
                         <div className='mt-5'>
-                            <input className='px-7 py-4 bg-white rounded-md outline-0' type="text" placeholder='Type here'/>
+                        {/* <LoadCanvasTemplate  className="w-full"/> */}
+                        <LoadCanvasTemplateNoReload/>
                         </div>
+                        <div className='mt-5'>
+                            <input ref={CaptchaInput} className='px-7 py-4 bg-white rounded-md outline-0' type="text" placeholder='Type here'/>
+                        </div>
+                        <p className='text-red-700 mt-2'>{error && error}</p>
                         <div className='mt-5'>
                             <button type='submit' className='bg-[#d1a054b2] block p-4 text-white w-full rounded-md'>Sign In</button>
                         </div>
@@ -34,8 +105,8 @@ const Login = () => {
                         </div>
                         <ul className='flex justify-center items-center gap-4'>
                             <li className='border-2 cursor-pointer border-[#444444] rounded-full p-2 text-2xl'><RiFacebookFill/></li>
-                            <li className='border-2 cursor-pointer border-[#444444] rounded-full p-2 text-2xl'><IoLogoGoogle/></li>
-                            <li className='border-2 cursor-pointer border-[#444444] rounded-full p-2 text-2xl'><AiFillGithub/></li>
+                            <li onClick={handelGoogle} className='border-2 cursor-pointer border-[#444444] rounded-full p-2 text-2xl'><IoLogoGoogle/></li>
+                            <li onClick={handelGitHub} className='border-2 cursor-pointer border-[#444444] rounded-full p-2 text-2xl'><AiFillGithub/></li>
                         </ul>
                     </form>
                 </div>
