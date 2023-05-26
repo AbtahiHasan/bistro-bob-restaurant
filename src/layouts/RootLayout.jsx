@@ -4,12 +4,13 @@ import Footer from '../components/Footer';
 
 const RootLayout = () => {
     const location = useLocation()
-    const noHeaderFooter = location.pathname === "/login"
+    const noHeaderFooter = location.pathname === "/login" 
+    const noHeaderFooterSignUp = location.pathname === "/sign-up" 
     return (
         <main>
-           {noHeaderFooter || <Navbar/>}
+           {noHeaderFooter || noHeaderFooterSignUp || <Navbar/>}
             <Outlet/>
-            {noHeaderFooter || <Footer/>}
+            {noHeaderFooter || noHeaderFooterSignUp || <Footer/>}
         </main>
     );
 };
