@@ -24,7 +24,11 @@ const Login = () => {
     const login = (e) => {
         e.preventDefault()
         
-        if(validateCaptcha(CaptchaInput.current.value)) {
+        if(!validateCaptcha(CaptchaInput.current.value)) {
+                setError("Captcha is not valid")
+                return
+            }
+            
             const form = e.target
             const email = form.email.value;
             const password = form.password.value
@@ -42,10 +46,6 @@ const Login = () => {
             .catch(error => {
                 setError(error.message)  
             })
-            }
-            else {
-                setError("Captcha is not valid")
-            }
     } 
 
     const handelGoogle = () => {
