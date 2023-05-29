@@ -2,6 +2,7 @@ import MenuCard from "./MenuCard";
 import MenuCover from "./MenuCover";
 
 const Menus = ({category, img, title, banner}) => {
+   
     return (
         <section className={`${banner ? "mt-[140px]" :"mt-8"}`}>
         {banner ? <MenuCover img={img} title={title}/> : ""}

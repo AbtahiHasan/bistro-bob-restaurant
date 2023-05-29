@@ -8,7 +8,7 @@ import bannerImg5 from "/home/05.png"
 import bannerImg6 from "/home/06.png"
 const Banner = () => {
     return (
-        <section>
+        <section className="text-center">
              <Carousel centerMode={false}>
                 <div className="w-full">
                     <img className="w-full object-cover" src={bannerImg1} />

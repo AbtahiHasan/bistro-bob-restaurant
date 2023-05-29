@@ -6,10 +6,11 @@ import { HiMenuAlt1 } from "react-icons/hi";
 import { BiCart } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
 import { useAuth } from "../context/AuthProvider";
+import useCart from "../hooks/useCart";
 const Navbar = () => {
     const [toggle, seToggle] = useState(false)
     const {user} = useAuth()
-    console.log(user)
+    const {carts} = useCart()
     return (
         <nav className="flex justify-between px-3 py-2 md:px-[55px] z-[1000000] fixed top-0 left-0 right-0 bg-[#1515157f]">
             <img className="h-[45px]" src={logo} alt="logo" />
@@ -33,7 +34,7 @@ const Navbar = () => {
                     <NavLink to="/our-shop/salad" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Shop</NavLink>
                 </li>
                 <li className="md:ml-16">
-                    <Link to="/dashboard/mycart"><p className="relative w-6"><BiCart/> <span className="bg-[#c02727] absolute -top-5 -right-4 inline-block px-2 rounded-full">0</span></p></Link>
+                    <Link to="/dashboard/mycart"><p className="relative w-6"><BiCart/> <span className="bg-[#c02727] absolute -top-5 -right-4 inline-block px-2 rounded-full">{carts.length || 0}</span></p></Link>
                 </li>
                 <li>
                     {

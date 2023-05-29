@@ -3,10 +3,34 @@ import MenuCover from "../components/MenuCover";
 import banner from "/shop/banner.jpg"
 import useCategory from "../hooks/useCategory";
 import FoodCard from "../components/FoodCard";
+import useCart from "../hooks/useCart";
+import { useAuth } from "../context/AuthProvider";
 
 const OurShop = () => {
     const {categoryName} = useParams()
     const categories = useCategory(categoryName)
+    const {user} = useAuth()
+    const {refetch} = useCart()
+    const addToCart = (id) => {
+        const cart = {
+            id: id,
+            email: user?.email
+        }
+        fetch("http://localhost:3000/add-cart", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(cart)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data) {
+                refetch()
+            }
+        })
+    }
     return (
         <main>
             <MenuCover variant={"banner"} img={banner} title={"OUR SHOP"}/>
@@ -30,7 +54,7 @@ const OurShop = () => {
 
             <section className="grid md:grid-cols-3 gap-5 container mt-10">
                 {
-                    categories.map(category => <FoodCard key={category._id} home={false} menu={category}/>)
+                    categories.map(category => <FoodCard key={category._id} addToCart={addToCart} home={false} menu={category}/>)
                 }
             </section>
         </main>
