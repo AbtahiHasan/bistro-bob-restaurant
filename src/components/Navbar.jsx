@@ -1,10 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "/logo.png"
+import userPlaceHolder from "/icon/user-placeholder.png"
 import { useState } from "react";
 import { HiMenuAlt1 } from "react-icons/hi";
+import { BiCart } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
+import { useAuth } from "../context/AuthProvider";
 const Navbar = () => {
     const [toggle, seToggle] = useState(false)
+    const {user} = useAuth()
+    console.log(user)
     return (
         <nav className="flex justify-between px-3 py-2 md:px-[55px] z-[1000000] fixed top-0 left-0 right-0 bg-[#1515157f]">
             <img className="h-[45px]" src={logo} alt="logo" />
@@ -26,6 +31,19 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink to="/our-shop/salad" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Shop</NavLink>
+                </li>
+                <li className="md:ml-16">
+                    <Link to="/dashboard/mycart"><p className="relative w-6"><BiCart/> <span className="bg-[#c02727] absolute -top-5 -right-4 inline-block px-2 rounded-full">0</span></p></Link>
+                </li>
+                <li>
+                    {
+                        user?.email ? <button className="font-bold">SIGN OUT</button> : <button><Link to="/login">Login</Link></button>
+                    }
+                </li>
+                <li>
+                    {
+                        user && user?.photoURL ? <img className="w-[44px] rounded-full" src={user?.photoURL || userPlaceHolder} alt="" /> : <img className="w-[44px]" src={userPlaceHolder} alt="" />
+                    }
                 </li>
             </ul>
         </nav>
