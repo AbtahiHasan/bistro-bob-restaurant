@@ -2,10 +2,43 @@ import React from 'react';
 import useCart from '../../hooks/useCart';
 import Heading from '../../components/Heading';
 import TableBody from '../components/my-cart/TableBody';
+import Swal from 'sweetalert2';
 
 const MyCart = () => {
-    const {carts} = useCart()
+    const {refetch,carts} = useCart()
     const total = carts.reduce((total, num) => total + num.price, 0)
+    const deleteMenu = (id) => {        
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`http://localhost:3000/cart/${id}`, {
+                            method: "DELETE"
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if(data.deletedCount > 0) {
+                                refetch()
+                                Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                      )
+                                }
+                         })
+
+                    //   
+                    }
+                  })
+           
+        
+    }
     return (
         <main className='h-screen overflow-hidden'>
             <Heading heading="WANNA ADD MORE?"  subHeading={"My Cart"}/>
@@ -28,7 +61,7 @@ const MyCart = () => {
                     <tbody >
 
                         {
-                            carts.map((cart, i) => <TableBody key={cart._id} i={i} cart={cart}/>)
+                            carts.map((cart, i) => <TableBody key={cart._id} i={i} cart={cart} deleteMenu={deleteMenu} />)
                         }
                         
                     </tbody>

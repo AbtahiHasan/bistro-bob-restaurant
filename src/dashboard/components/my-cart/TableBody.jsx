@@ -1,6 +1,6 @@
 import { BsTrash3Fill } from "react-icons/bs";
 
-const TableBody = ({cart, i}) => {
+const TableBody = ({cart, i, deleteMenu}) => {
     const {_id, image, item_name, price} = cart
     return (
         
@@ -9,7 +9,7 @@ const TableBody = ({cart, i}) => {
             <td className="py-2"><img className="h-[75px] w-[75px] object-cover mx-auto" src={image} alt="" /></td>
             <td className="py-2 text-center">{item_name}</td>
             <td className="py-2 text-center">${price}</td>
-            <td className="py-2"><button className="bg-[#B91C1C] p-3 rounded text-white block mx-auto"><BsTrash3Fill/></button></td>
+            <td className="py-2"><button onClick={() => deleteMenu(_id)} className="bg-[#B91C1C] p-3 rounded text-white block mx-auto"><BsTrash3Fill/></button></td>
         </tr>
         
     );
