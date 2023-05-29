@@ -10,8 +10,10 @@ export default {
         'dashboard-md': '280px auto'
       },
       spacing: {
-        'dashboard-md': "280px"
-      }
+        'dashboard-md': '280px',
+        'dashboard-body': 'calc(100% - 280px)'
+      },
+
     },
   },
   plugins: [],

@@ -11,9 +11,9 @@ const OurShop = () => {
     const categories = useCategory(categoryName)
     const {user} = useAuth()
     const {refetch} = useCart()
-    const addToCart = (id) => {
+    const addToCart = (menu) => {
         const cart = {
-            id: id,
+            ...menu,
             email: user?.email
         }
         fetch("http://localhost:3000/add-cart", {
