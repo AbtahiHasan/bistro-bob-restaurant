@@ -34,7 +34,7 @@ const Navbar = () => {
                     <NavLink to="/our-shop/salad" className={({isActive}) => isActive ? "active" : "font-bold uppercase"}>Our Shop</NavLink>
                 </li>
                 <li className="md:ml-16">
-                    <Link to="/dashboard/mycart"><p className="relative w-6"><BiCart/> <span className="bg-[#c02727] absolute -top-5 -right-4 inline-block px-2 rounded-full">{carts.length || 0}</span></p></Link>
+                    <Link to="/dashboard/my-cart"><p className="relative w-6"><BiCart/> <span className="bg-[#c02727] absolute -top-5 -right-4 inline-block px-2 rounded-full">{carts.length || 0}</span></p></Link>
                 </li>
                 <li>
                     {

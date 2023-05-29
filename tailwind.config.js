@@ -6,6 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        'dashboard-md': '280px auto'
+      },
+      spacing: {
+        'dashboard-md': "280px"
+      }
     },
   },
   plugins: [],

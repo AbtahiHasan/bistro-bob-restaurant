@@ -14,3 +14,7 @@
 .active {
     @apply text-[#EEFF25] font-bold uppercase
 }
+
+.d-active {
+    @apply text-white font-bold uppercase
+}
