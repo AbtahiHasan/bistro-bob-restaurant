@@ -1,13 +1,13 @@
 import React from 'react';
 import useCart from '../../hooks/useCart';
-import Heading from '../../components/Heading';
 import Swal from 'sweetalert2';
-import BookingTableBody from '../components/my-booking/BookingTableBody';
+import UserTable from '../components/all-users/UserTable';
+import Heading from '../../components/Heading';
 
-const MyBooking = () => {
+const AllUsers = () => {
     const {refetch,carts} = useCart()
     const total = carts.reduce((total, num) => total + num.price, 0)
-    const deleteMenu = (id) => {        
+    const deleteUser = (id) => {        
                 Swal.fire({
                     title: 'Are you sure?',
                     icon: 'warning',
@@ -40,28 +40,26 @@ const MyBooking = () => {
     }
     return (
         <main className='h-screen overflow-hidden'>
-            <Heading heading="MY BOOKINGS"  subHeading={"Excellent Ambience"}/>
+            <Heading heading="MANAGE ALL USERS"  subHeading={"How many??"}/>
             <div className='flex justify-between items-center font-bold mt-4'>
-                <h3 className='text-3xl'>Total orders: {carts.length || 0}</h3>
-                <h3 className='text-3xl'>total price: ${total}</h3>
-                <button className='bg-[#D1A054] p-2 rounded text-white uppercase'>Pay</button>
+                <h3 className='text-3xl'>Total Users: {carts.length || 0}</h3>
             </div>
             <section  className='bg-white  h-[500px] mt-2 overflow-x-auto relative'>
                 <table className='w-full text-white'>
                     <thead >
                         <tr className='bg-[#D1A054] sticky top-0 px-10'>
                             <th className='py-3'></th>
-                            <th className='py-3'>ITEM IMAGE</th>
-                            <th className='py-3'>GUEST NUMBER</th>
-                            <th className='py-3'>CATEGORY</th>
-                            <th className='py-3'>PRICE</th>
+                            <th className='py-3'>USER IMAGE</th>
+                            <th className='py-3'>NAME</th>
+                            <th className='py-3'>EMAIL</th>
+                            <th className='py-3'>ROLE</th>
                             <th className='py-3'>ACTION</th>
                         </tr>
                     </thead>
                     <tbody >
 
                         {
-                            carts.map((cart, i) => <BookingTableBody key={cart._id} i={i} cart={cart} deleteMenu={deleteMenu} />)
+                            carts.map((cart, i) => <UserTable key={cart._id} i={i} cart={cart} deleteUser={deleteUser} />)
                         }
                         
                     </tbody>
@@ -71,4 +69,4 @@ const MyBooking = () => {
     );
 };
 
-export default MyBooking;
+export default AllUsers;

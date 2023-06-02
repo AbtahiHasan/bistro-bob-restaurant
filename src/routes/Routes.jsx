@@ -15,6 +15,7 @@ import PaymentHistory from "../dashboard/pages/PaymentHistory";
 import AddReview from "../dashboard/pages/AddReview";
 import MyBooking from "../dashboard/pages/MyBooking";
 import RequiredLogin from "./private/RequiredLogin";
+import AllUsers from "../admin/pages/AllUsers";
 
 const Routes = createBrowserRouter([
     {
@@ -83,7 +84,10 @@ const Routes = createBrowserRouter([
                 path: "/dashboard/my-booking",
                 element: <RequiredLogin><MyBooking/></RequiredLogin>
             },
-            
+            {
+                path: "/dashboard/all-users",
+                element: <AllUsers/>
+            }
         ]
     }
 ])
