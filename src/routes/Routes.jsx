@@ -14,6 +14,7 @@ import Reservation from "../dashboard/pages/Reservation";
 import PaymentHistory from "../dashboard/pages/PaymentHistory";
 import AddReview from "../dashboard/pages/AddReview";
 import MyBooking from "../dashboard/pages/MyBooking";
+import RequiredLogin from "./private/RequiredLogin";
 
 const Routes = createBrowserRouter([
     {
@@ -56,31 +57,31 @@ const Routes = createBrowserRouter([
         children: [
             {
                 path: "/dashboard/profile",
-                element: <UserProfile/>
+                element: <RequiredLogin><UserProfile/></RequiredLogin>
             },
             {
                 path: "/dashboard/reservation",
-                element: <Reservation/>
+                element: <RequiredLogin><Reservation/></RequiredLogin>
             },
             {
                 path: "/dashboard/payment-history",
-                element: <PaymentHistory/>
+                element: <RequiredLogin><PaymentHistory/></RequiredLogin>
             },
             {
                 path: "/dashboard/my-cart",
-                element: <MyCart/>
+                element: <RequiredLogin><MyCart/></RequiredLogin>
             },
             {
                 path: "/dashboard/reservation",
-                element: <Reservation/>
+                element: <RequiredLogin><Reservation/></RequiredLogin>
             },
             {
                 path: "/dashboard/add-review",
-                element: <AddReview/>
+                element: <RequiredLogin><AddReview/></RequiredLogin>
             },
             {
                 path: "/dashboard/my-booking",
-                element: <MyBooking/>
+                element: <RequiredLogin><MyBooking/></RequiredLogin>
             },
             
         ]
