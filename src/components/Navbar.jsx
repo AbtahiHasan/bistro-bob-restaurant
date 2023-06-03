@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthProvider";
 import useCart from "../hooks/useCart";
 const Navbar = () => {
     const [toggle, seToggle] = useState(false)
-    const {user} = useAuth()
+    const {user, logOut} = useAuth()
     const {carts} = useCart()
     return (
         <nav className="flex justify-between px-3 py-2 md:px-[55px] z-[1000000] fixed top-0 left-0 right-0 bg-[#1515157f]">
@@ -38,12 +38,12 @@ const Navbar = () => {
                 </li>
                 <li>
                     {
-                        user?.email ? <button className="font-bold">SIGN OUT</button> : <button><Link to="/login">Login</Link></button>
+                        user?.email ? <button onClick={logOut} className="font-bold">SIGN OUT</button> : <button><Link to="/login">Login</Link></button>
                     }
                 </li>
                 <li>
                     {
-                        user && user?.photoURL ? <img className="w-[44px] rounded-full" src={user?.photoURL || userPlaceHolder} alt="" /> : <img className="w-[44px]" src={userPlaceHolder} alt="" />
+                        user && user?.photoURL ? <img className="w-[44px] rounded-full" src={user?.photoURL } alt="" /> : <img className="w-[44px]" src={userPlaceHolder} alt="" />
                     }
                 </li>
             </ul>

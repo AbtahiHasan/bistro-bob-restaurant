@@ -52,6 +52,23 @@ const Login = () => {
         signInWithGoogle()
             .then((result) => {
 
+                if(result.user) {
+                    const user = {
+                        name: result.user.displayName,
+                        photo_url: result.user.photoURL || null,
+                        email: result.user.email
+                    }
+                    console.log(result.email)
+                    fetch('http://localhost:3000/add-user', {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(user)
+                    })
+                    .then(res => res.json())
+                    .then(data => console.log(data))
+                }
                 navigate(from)
             })
             .catch((error) => {
@@ -62,8 +79,23 @@ const Login = () => {
     const handelGitHub = () => {
         signInWithGithub()
         .then((result) => {
-            const gitHub = result.user;
-
+            if(result.user) {
+                const user = {
+                    name: result.user.displayName,
+                    photo_url: result.user.photoURL || null,
+                    email: result.user.email
+                }
+                console.log(result.email)
+                fetch('http://localhost:3000/add-user', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(user)
+                })
+                .then(res => res.json())
+                .then(data => console.log(data))
+            }
             navigate(from)
         })
         .catch((error) => {
