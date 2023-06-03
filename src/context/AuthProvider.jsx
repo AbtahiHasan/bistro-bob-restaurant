@@ -41,7 +41,20 @@ const AuthProvider = ({children}) => {
     useEffect(()=> {
         const unsubscribe = onAuthStateChanged(auth, correntUser => {
             setUser(correntUser)
-            console.log(correntUser)
+            if(correntUser) {
+                fetch(`http://localhost:3000/jwt?email=${correntUser.email}`,
+                {
+                    method: "POST"
+                }
+                )
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem("access-token", data.token)
+                })
+            }
+            else {
+                localStorage.removeItem("access-token")
+            }
             setLoading(false)
         })
         return () => {

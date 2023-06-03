@@ -11,7 +11,7 @@ const UserTable = ({user, i, deleteUser, makeAdmin}) => {
             <td className="py-2"><img className="h-[75px] w-[75px] object-cover mx-auto" src={photo_url} alt="" /></td>
             <td className="py-2 text-center">{name}</td>
             <td className="py-2 text-center">{email}</td>
-            <td className="py-2 text-center "><button onClick={() => makeAdmin(email)} className="bg-[#D1A054] p-3 rounded text-white block mx-auto">
+            <td className="py-2 text-center "><button disabled={role === "admin"} onClick={() => makeAdmin(email)} className={`bg-[#D1A054] p-3 rounded text-white block mx-auto ${role === "admin" ? "cursor-not-allowed" : ""}`}>
                  <img className="w-[20px] h-[20px]" src={role === "admin" ? admin : userImage} alt="" />
                 </button></td>
             <td className="py-2"><button onClick={() => deleteUser(_id)} className="bg-[#B91C1C] p-3 rounded text-white block mx-auto"><BsTrash3Fill/></button></td>
