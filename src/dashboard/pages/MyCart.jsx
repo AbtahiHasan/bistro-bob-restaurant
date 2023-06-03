@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 const MyCart = () => {
     const {refetch,carts} = useCart()
-    const total = carts.reduce((total, num) => total + num.price, 0)
+    const total = carts.length > 0 ? carts.reduce((total, num) => total + num.price, 0) : 0
     const deleteMenu = (id) => {        
                 Swal.fire({
                     title: 'Are you sure?',
