@@ -21,7 +21,6 @@ const AllUsers = () => {
                         })
                         .then(res => res.json())
                         .then(data => {
-                            console.log(data)
                             if(data.deletedCount > 0) {
                                 refetchUser()
                                 Swal.fire(
@@ -81,7 +80,7 @@ const AllUsers = () => {
         <main className='h-screen overflow-hidden'>
             <Heading heading="MANAGE ALL USERS"  subHeading={"How many??"}/>
             <div className='flex justify-between items-center font-bold mt-4'>
-                <h3 className='text-3xl'>Total Users: {users.length || 0}</h3>
+                <h3 className='text-3xl'>Total Users: {users.length > 0 ?  users.length : 0}</h3>
             </div>
             <section  className='bg-white  h-[500px] mt-2 overflow-x-auto relative'>
                 <table className='w-full text-white'>
@@ -98,7 +97,7 @@ const AllUsers = () => {
                     <tbody >
 
                         {
-                            users.map((user, i) => <UserTable key={user._id} i={i} makeAdmin={makeAdmin} user={user} deleteUser={deleteUser} />)
+                            users && users.map((user, i) => <UserTable key={user._id} i={i} makeAdmin={makeAdmin} user={user} deleteUser={deleteUser} />)
                         }
                         
                     </tbody>

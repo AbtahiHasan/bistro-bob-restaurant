@@ -6,7 +6,7 @@ import BookingTableBody from '../components/my-booking/BookingTableBody';
 
 const MyBooking = () => {
     const {refetch,carts} = useCart()
-    const total = carts.reduce((total, num) => total + num.price, 0)
+    const total = carts.length > 0 ? carts.reduce((total, num) => total + num.price, 0) : 0
     const deleteMenu = (id) => {        
                 Swal.fire({
                     title: 'Are you sure?',
@@ -61,7 +61,7 @@ const MyBooking = () => {
                     <tbody >
 
                         {
-                            carts.map((cart, i) => <BookingTableBody key={cart._id} i={i} cart={cart} deleteMenu={deleteMenu} />)
+                           carts && carts.map((cart, i) => <BookingTableBody key={cart._id} i={i} cart={cart} deleteMenu={deleteMenu} />)
                         }
                         
                     </tbody>

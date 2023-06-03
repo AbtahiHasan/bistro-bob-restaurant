@@ -20,7 +20,7 @@ const Testimonials = () => {
          navigation={true} modules={[Navigation]}>
 
             {
-                ratings.map((rating, index )=> {
+              ratings &&  ratings.map((rating, index )=> {
                     return (
                         <SwiperSlide key={index}>
                             <div className="flex items-center justify-center mt-10 text-[40px] text-[#CD9003]">

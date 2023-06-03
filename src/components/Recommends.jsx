@@ -10,7 +10,7 @@ const Recommends = () => {
             <div className="mt-8 grid md:grid-cols-3 gap-5">
                 
                 {
-                    menues.slice(0,3).map(menu => <FoodCard key={menu._id} home={true} menu={menu} />)
+                   menues && menues.slice(0,3).map(menu => <FoodCard key={menu._id} home={true} menu={menu} />)
                 }
             </div>
         </section>

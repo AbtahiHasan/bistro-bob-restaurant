@@ -12,7 +12,7 @@ const PopulerMenu = () => {
             <Heading heading="FROM OUR MENU" subHeading="Check it out" />
             <div className="grid md:grid-cols-2 gap-5 mt-8">
                 {
-                    popular.map(menu => <MenuCard key={menu._id} menu={menu}/>)
+                    popular && popular.map(menu => <MenuCard key={menu._id} menu={menu}/>)
                 }
                 
             </div>

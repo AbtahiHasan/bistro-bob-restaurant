@@ -54,7 +54,7 @@ const OurShop = () => {
 
             <section className="grid md:grid-cols-3 gap-5 container mt-10">
                 {
-                    categories.map(category => <FoodCard key={category._id} addToCart={addToCart} home={false} menu={category}/>)
+                   categories && categories.map(category => <FoodCard key={category._id} addToCart={addToCart} home={false} menu={category}/>)
                 }
             </section>
         </main>
