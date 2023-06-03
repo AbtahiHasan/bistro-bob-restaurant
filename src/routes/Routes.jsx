@@ -16,6 +16,7 @@ import AddReview from "../dashboard/pages/AddReview";
 import MyBooking from "../dashboard/pages/MyBooking";
 import RequiredLogin from "./private/RequiredLogin";
 import AllUsers from "../admin/pages/AllUsers";
+import AdminOnly from "./private/AdminOnly";
 
 const Routes = createBrowserRouter([
     {
@@ -86,7 +87,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "/dashboard/all-users",
-                element: <AllUsers/>
+                element: <AdminOnly><AllUsers/></AdminOnly>
             }
         ]
     }

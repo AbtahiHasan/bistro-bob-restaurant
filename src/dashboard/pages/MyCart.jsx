@@ -33,7 +33,7 @@ const MyCart = () => {
                                 }
                          })
 
-                    //   
+            
                     }
                   })
            
@@ -61,7 +61,7 @@ const MyCart = () => {
                     <tbody >
 
                         {
-                            carts.map((cart, i) => <TableBody key={cart._id} i={i} cart={cart} deleteMenu={deleteMenu} />)
+                            carts && carts.map((cart, i) => <TableBody key={cart._id} i={i} cart={cart} deleteMenu={deleteMenu} />)
                         }
                         
                     </tbody>
