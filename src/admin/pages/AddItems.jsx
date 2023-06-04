@@ -2,11 +2,14 @@ import Select from 'react-select'
 import Heading from "../../components/Heading";
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 
 const AddItems = () => {
     const [selectedOption, setSelectedOption] = useState("salad");
     const {register, handleSubmit, reset} = useForm()
+    const {axiosSecure} = useAxiosSecure()
     const options = [
         { value: 'salad', label: 'Salad' },
         { value: 'pizza', label: 'Pizza' },
@@ -34,7 +37,19 @@ const AddItems = () => {
                     price: data.price,
                     recipe: data.recipe
                 }
-
+                axiosSecure.post("/add-menu", newItem)
+                .then(data => {
+                    if(data.data._id) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Insert successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                    }
+                })
+                
             }
         })
  }
