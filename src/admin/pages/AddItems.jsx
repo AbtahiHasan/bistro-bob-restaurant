@@ -1,51 +1,74 @@
 import Select from 'react-select'
 import Heading from "../../components/Heading";
 import { useState } from 'react';
-import { FileUploader } from 'react-drag-drop-files';
+import { useForm } from 'react-hook-form';
 
 
 const AddItems = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [file, setFile] = useState(null);
-    const handleChange = (file) => {
-      setFile(file);
-    };
-    const fileTypes = ["JPG", "PNG"];
+    const [selectedOption, setSelectedOption] = useState("salad");
+    const {register, handleSubmit, reset} = useForm()
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
+        { value: 'salad', label: 'Salad' },
+        { value: 'pizza', label: 'Pizza' },
+        { value: 'soup', label: 'Soup' },
+        { value: 'dessert', label: 'Dessert' },
+        { value: 'drinks', label: 'Drinks' }
     ]
-  
+    const imageHostingApi = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOSTING_API_KEY}`
+    const addItem = (data) => { 
+        const formData = new FormData()
+        formData.append("image", data.image[0])
+        
+        fetch(imageHostingApi, {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(imgResponse => {
+            console.log(imgResponse)
+            if(imgResponse.success) {
+                const newItem = {
+                    name: data.name,
+                    image: imgResponse.data.display_url,
+                    category: selectedOption.value,
+                    price: data.price,
+                    recipe: data.recipe
+                }
+
+            }
+        })
+ }
+
     return (
         <main>
             <Heading heading={"ADD AN ITEM"} subHeading={"What's new?"} />
-            <form> 
+            <form onSubmit={handleSubmit(addItem)}> 
                 <div>
                     <span className="font-bold text-[20px] block">Recipe name*</span>
-                    <input className="w-full py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe name"/>
+                    <input {...register("name", {required: true})} className="w-full bg-white py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe name"/>
                 </div>
                 <div className="grid md:grid-cols-2 gap-5 mt-3">
                     <div>
                         <span className="font-bold text-[20px] block">Category*</span>
                         <div className='mt-2'>
-                        <Select
+                        <Select 
                              defaultValue={selectedOption}
                             onChange={setSelectedOption}
-                            options={options}/>
+                            options={options} required={true}/>
+                             
                         </div>
                     </div>
                     <div>
                         <span className="font-bold text-[20px] block">Price*</span>
-                        <input className="w-full py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="number" placeholder="Price"/>
+                        <input  {...register("price", {required: true})} className="w-full py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="number" placeholder="Price"/>
                     </div>
                 </div>
                 <div className='mt-2'>
                         <span className="font-bold text-[20px] block">Recipe Details*</span>
-                        <textarea className="w-full resize-none py-3 h-[200px] px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe Details"/>
+                        <textarea {...register("recipe", {required: true})} className="w-full resize-none py-3 h-[200px] px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe Details"/>
                     </div>
                 <div className='w-full'>
-                    <FileUploader classes="p-10 mt-5" handleChange={handleChange} name="file" types={fileTypes} />
+                    <input type="file"   {...register("image", {required: true})} id="" />
                 </div>
                 <div>
                     <button style={{background: "linear-gradient(90deg, #835D23 0%, #B58130 100%)"}} className="px-5 p-3 mt-3 text-white" type='submit'>Add Item</button>
