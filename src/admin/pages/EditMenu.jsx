@@ -10,83 +10,52 @@ import { useParams } from 'react-router-dom';
 
 const EditMenu = () => {
     const {id} = useParams()
-    const {register, handleSubmit, reset} = useForm()
-    const {refetch, menu} = useSingleMenu(id)
+    const {menu} = useSingleMenu(id)
     const {axiosSecure} = useAxiosSecure()
-    const {name, price,image,recipe, category } = menu
-    const [selectedOption, setSelectedOption] = useState(category);
+    const {name, price,recipe } = menu
 
-    const options = [
-        { value: 'salad', label: 'Salad' },
-        { value: 'pizza', label: 'Pizza' },
-        { value: 'soup', label: 'Soup' },
-        { value: 'dessert', label: 'Dessert' },
-        { value: 'drinks', label: 'Drinks' }
-    ]
-    const imageHostingApi = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOSTING_API_KEY}`
-    const addItem = (data) => { 
-        const formData = new FormData()
-        formData.append("image", data.image[0])
-        
-        fetch(imageHostingApi, {
-            method: "POST",
-            body: formData
-        })
-        .then(res => res.json())
-        .then(imgResponse => {
-            console.log(imgResponse)
-            if(imgResponse.success) {
-                const newItem = {
-                    name: data.name,
-                    image: imgResponse.data.display_url,
-                    category: selectedOption.value,
-                    price: data.price,
-                    recipe: data.recipe
+
+
+    const updateItem = (e) => {      
+                e.preventDefault()
+                const from = e.target
+                const updatedValue = {
+                    name: from.name.value,
+                    price: from.price.value,
+                    recipe: from.recipe.value
                 }
-                axiosSecure.post("/add-menu", newItem)
+                axiosSecure.put(`/update-menu/${id}`, updatedValue)
                 .then(data => {
-                    if(data.data._id) {
+                    if(data.data.modifiedCount > 0) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'Insert successfully',
+                            title: 'Updated successfully',
                             showConfirmButton: false,
                             timer: 1500
                           })
                     }
                 })
-                
-            }
-        })
+
+
  }
 
     return (
         <main>
             <Heading heading={"UPDATE ITEM"} subHeading={"What's new?"} />
-            <form onSubmit={handleSubmit(addItem)}> 
+            <form onSubmit={updateItem}> 
                 <div>
                     <span className="font-bold text-[20px] block">Recipe name*</span>
-                    <input defaultValue={name} {...register("name", {required: true})} className="w-full bg-white py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe name"/>
+                    <input defaultValue={name} name='name'  className="w-full bg-white py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe name"/>
                 </div>
-                <div className="grid md:grid-cols-2 gap-5 mt-3">
-                    <div>
-                        <span className="font-bold text-[20px] block">Category*</span>
-                        <div className='mt-2'>
-                        <Select 
-                            defaultValue={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options} required={true}/>
-                             
-                        </div>
-                    </div>
-                    <div>
+            
+                <div className='mt-2'>
                         <span className="font-bold text-[20px] block">Price*</span>
-                        <input defaultValue={price} {...register("price", {required: true})} className="w-full py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="number" placeholder="Price"/>
+                        <input defaultValue={price} name='price'  className="w-full py-2 px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Price"/>
                     </div>
-                </div>
                 <div className='mt-2'>
                         <span className="font-bold text-[20px] block">Recipe Details*</span>
-                        <textarea defaultValue={recipe} {...register("recipe", {required: true})} className="w-full resize-none py-3 h-[200px] px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe Details"/>
+                        <textarea defaultValue={recipe} name='recipe'  className="w-full resize-none py-3 h-[200px] px-5 outline-0 border-[#E8E8E8] rounded mt-2" type="text" placeholder="Recipe Details"/>
                     </div>
                
                 <div>

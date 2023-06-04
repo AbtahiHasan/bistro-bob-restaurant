@@ -2,10 +2,11 @@ import Swal from 'sweetalert2';
 import UserTable from '../components/all-users/UserTable';
 import Heading from '../../components/Heading';
 import useUsers from '../../hooks/useUsers';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AllUsers = () => {
     const {refetchUser, users} = useUsers()
-
+    const {axiosSecure} = useAxiosSecure()
     const deleteUser = (id) => {        
                 Swal.fire({
                     title: 'Are you sure?',
@@ -16,12 +17,9 @@ const AllUsers = () => {
                     confirmButtonText: 'Yes, delete it!'
                   }).then((result) => {
                     if (result.isConfirmed) {
-                        fetch(`http://localhost:3000/user/${id}`, {
-                            method: "DELETE"
-                        })
-                        .then(res => res.json())
+                        axiosSecure.delete(`/delete-user/${id}`)
                         .then(data => {
-                            if(data.deletedCount > 0) {
+                            if(data.data.deletedCount > 0) {
                                 refetchUser()
                                 Swal.fire(
                                         'Deleted!',
@@ -51,28 +49,15 @@ const AllUsers = () => {
             confirmButtonText: 'Yes'
           }).then((result) => {
             if (result.isConfirmed) {
-                const adminRole = {
-                    role: "admin"
-                }
-                fetch(`http://localhost:3000/make-admin/${email}`, 
-                {
-                    method: "PUT",
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify(adminRole)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
+                axiosSecure.put(`/make-admin/${email}`)
+                .then(res => {
                     refetchUser()
                     Swal.fire(
                         'Done!',
                         'This user now Admin',
                         'success'
                       )
-                })
-              
+                })              
             }
           })
     }
