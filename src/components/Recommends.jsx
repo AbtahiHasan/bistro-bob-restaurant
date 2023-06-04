@@ -3,7 +3,7 @@ import Heading from "./Heading";
 import useMenus from "../hooks/useMenus";
 
 const Recommends = () => {
-    const menues = useMenus()
+    const {menues} = useMenus()
     return (
         <section className="mt-[140px] container">
             <Heading heading="Should Try" subHeading="CHEF RECOMMENDS"/>
