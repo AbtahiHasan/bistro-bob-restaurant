@@ -19,6 +19,7 @@ import AllUsers from "../admin/pages/AllUsers";
 import AdminOnly from "./private/AdminOnly";
 import AddItems from "../admin/pages/AddItems";
 import ManageItems from "../admin/pages/ManageItems";
+import EditMenu from "../admin/pages/EditMenu";
 
 const Routes = createBrowserRouter([
     {
@@ -98,6 +99,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/dashboard/manage-items",
                 element: <AdminOnly><ManageItems/></AdminOnly>
+            },
+            {
+                path: "/dashboard/manage-items/:id/edit",
+                element: <EditMenu/>
             }
         ]
     }
